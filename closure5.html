@@ -1,0 +1,11 @@
+<script>
+    function f1(callback){ // a=20, b=10, callback = function(result){}
+      let a = 20, b=10;
+      let result = a + b;
+      callback(result);
+    }
+
+    f1(function(result){
+        console.log("Addition : "+result);
+    })
+</script>

@@ -1,0 +1,19 @@
+<script>
+    function DataEncapsulation(data) {
+        this.data = data;
+        this.f1 = function(){
+            console.log("Inside F1 : "+this.data);
+        }
+        this.f2 = function(){
+            console.log("Inside F2 : "+this.data);
+        }
+        this.f3 = function(){
+            console.log("Inside F3 : "+this.data);
+        }
+    }
+    
+    let obj = new DataEncapsulation(200); // obj : data=200
+    obj.f1();
+    obj.f2();
+    obj.f3();
+</script>

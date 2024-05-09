@@ -1,0 +1,32 @@
+<script>
+    /*
+      class Addition{
+        private int a;
+        private int b;
+        public Addition(int a, int b){
+            this.a = a;
+            this.b = b;
+        }
+        public void add(){
+            System.out.println("Addition : "+(this.a + this.b));
+        }
+      }
+    */
+   function Addition(a,b){
+    this.a = a;
+    this.b = b;
+    this.add = function(){
+        console.log("Addition : "+(this.a+ this.b));
+        sayHi();
+        test();
+    }
+    sayHi = function(){
+        console.log("Hii Nidhi...");
+    }
+   }
+
+   let obj = new Addition(20,30);
+   obj.add();
+   //obj.sayHi(); 
+</script>
+
