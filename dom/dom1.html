@@ -1,0 +1,30 @@
+<!-- 
+    
+    <img src="micky.png" id="logo" width="100" height="100"/>
+    
+    DOM
+      img :(src,id,width,height) 
+    
+    Javascript:-
+       document.constructor.name :--- HTMLDocument
+       (getElementById(), getElementByClassName(),querySelector(),document.getElementByTagName())
+
+ -->
+<html>
+    <body>
+       <center> 
+        <img id="logo" src="./images/proejector.jpeg" width="300" height="300"/>
+        <p id="greet">Hii Nidhi....</p>
+       </center>
+       <script>
+          var imgElement = document.getElementById("logo");
+          //window.alert(imgElement.constructor.name);
+          imgElement.width = "500";
+          imgElement.height = "500"; 
+       
+          var p = document.getElementById("greet");
+          p.style.color = "red";
+          p.innerText = "Hello Nidhi...";
+       </script>
+    </body>
+</html>

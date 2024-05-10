@@ -1,0 +1,24 @@
+<html>
+    <body>
+        <center>
+            <img src="./images/puma.png" id="main" width="100" height="100"/>
+            <br/><br/><br/>
+            <button id="plus">+</button>
+            <button id="minus">-</button>
+        </center>
+
+        <script>
+             document.getElementById("plus").addEventListener("click",function(){
+                var mainImage = document.getElementById("main");
+                mainImage.width+=50;
+                 mainImage.height+=50;
+             });
+
+             document.getElementById("minus").addEventListener("click",function(){
+                var mainImage = document.getElementById("main");
+                mainImage.width-=50;
+                 mainImage.height-=50;
+             });
+        </script>
+    </body>
+</html>

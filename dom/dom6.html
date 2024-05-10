@@ -1,0 +1,58 @@
+<html>
+    <body>
+        <button onclick="changeTheme('orange','blue')">Orange-Blue</button>
+        <button onclick="changeTheme('green','orange')">Green-Orange</button>
+        <button onclick="changeTheme('pink','yellow')">Pink-Yellow</button>
+        <table border='1' width="100%" id="data-table">
+            <tr>
+                <td>S.no</td>
+                <td>Name</td>
+                <td>Mobile</td>
+                <th>Address</th>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>ABC</td>
+                <td>0000000000</td>
+                <td>test address</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>ABC</td>
+                <td>0000000000</td>
+                <td>test address</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>ABC</td>
+                <td>0000000000</td>
+                <td>test address</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>ABC</td>
+                <td>0000000000</td>
+                <td>test address</td>
+            </tr>
+            <tr>
+                <td>100</td>
+                <td>ABC</td>
+                <td>0000000000</td>
+                <td>test address</td>
+            </tr>
+        </table>
+        <script>
+          function changeTheme(firstColor,secondColor){
+            console.log("called....");
+            var tableObj = document.getElementById("data-table");
+            
+            for(var rowIndex=0; rowIndex<tableObj.rows.length; rowIndex++){
+                if(rowIndex%2==0)
+                 tableObj.rows[rowIndex].style.backgroundColor = ""+firstColor;
+                else
+                 tableObj.rows[rowIndex].style.backgroundColor = ""+secondColor;
+            }
+          }     
+        </script>
+    </body>
+</html>
