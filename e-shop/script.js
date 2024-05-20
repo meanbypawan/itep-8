@@ -59,15 +59,16 @@ function signInAction(emailInput,passwordInput){
   var password = passwordInput.value;
   var userList = JSON.parse(localStorage.getItem("user-list"));
   var user = userList.find((user)=>{return user.email == email && user.password == password});
-  user ? DashBoardComponent(): window.alert("Invalid email id and password"); 
+  localStorage.setItem("current-user",JSON.stringify(user));
+  user ? DashBoardComponent(user): window.alert("Invalid email id and password"); 
 }
-function DashBoardComponent(){
+function DashBoardComponent(user){
   var mainDiv = document.getElementById("main");
   mainDiv.innerHTML = "";
-  HeaderComponent(mainDiv);
+  HeaderComponent(mainDiv,user);
   CardComponent(JSON.parse(localStorage.getItem("product-list")));
 }
-function HeaderComponent(mainDiv){
+function HeaderComponent(mainDiv,user){
   mainDiv.classList.remove("d-flex","justify-content-center","align-items-center");
   var headerDiv = document.createElement("div");
   headerDiv.setAttribute("style","height:60px;");
@@ -81,8 +82,17 @@ function HeaderComponent(mainDiv){
   
   var menuDiv = document.createElement("div");
   menuDiv.setAttribute("style","width: 20%;border:1px solid red; height: 60px;");
+  menuDiv.setAttribute("class","text-white d-flex justify-content-around align-items-center");
 
-  headerDiv.appendChild(logoDiv);
+  var cartOption = document.createElement("small");
+  cartOption.innerText = "View cart";
+  
+  var signOutOption = document.createElement("small");
+  signOutOption.innerText = "Sign out";
+
+  menuDiv.appendChild(cartOption);
+  menuDiv.appendChild(signOutOption);
+  headerDiv.appendChild(logoDiv); 
   headerDiv.appendChild(searchInputDiv);
   headerDiv.appendChild(menuDiv);
   mainDiv.appendChild(headerDiv);
@@ -95,18 +105,75 @@ function CardComponent(productList){
    
    var cardRow = document.createElement("div");
    cardRow.setAttribute("id","card-row");
-   cardRow.setAttribute("class","row");
+   cardRow.setAttribute("class","row mt-3");
   
    for(let product of productList){
      var cardCol = document.createElement("div");
-     cardCol.setAttribute("class","col-md-3");
-     cardCol.setAttribute("style","box-shadow: 0 0 3px grey; height:350px;");
+     cardCol.setAttribute("class","col-md-3 p-1 mt-1");
+     //cardCol.setAttribute("style","height:350px;");
+     
+     var productCard = document.createElement("div");
+     productCard.setAttribute("style","box-shadow:0 0 5px grey;height:400px;");
+     productCard.setAttribute("class","d-flex flex-column justify-content-center align-items-center");
+
+     var productImage = document.createElement("img");
+     productImage.setAttribute("src",product.thumbnail);
+     productImage.setAttribute("style","width:100%;height:250px;");
+     productCard.appendChild(productImage);
+
+     var titleLabel = document.createElement("h4");
+     titleLabel.innerText = product.title.substring(0,20);
+     productCard.appendChild(titleLabel);
+     
+     var priceLabel = document.createElement("p");
+     priceLabel.innerHTML = `Price : <b class='text-success'>${product.price}</b>.Rs `
+     productCard.appendChild(priceLabel);
+     
+     var addToCartButton = document.createElement("button");
+     addToCartButton.setAttribute("class","btn btn-secondary");
+     addToCartButton.setAttribute("style","width:100%");
+     addToCartButton.innerText = "Add To Cart";
+
+     addToCartButton.addEventListener("click",function(){
+      handleAddToCartAction(product);
+     });
+
+     productCard.appendChild(addToCartButton);
+     cardCol.appendChild(productCard);
+     
      cardRow.appendChild(cardCol); 
    }
    cardContainer.appendChild(cardRow);
 
    mainDiv.appendChild(cardContainer);
    
+}
+function handleAddToCartAction(product){
+  var currentUser = JSON.parse(localStorage.getItem("current-user"));
+  var cartList = JSON.parse(localStorage.getItem("cart-list"));
+
+  var index = cartList.findIndex((cartItem)=>{return cartItem.email == currentUser.email});
+  if(index != -1){
+    // second time user performing add to cart
+    var cart= cartList[index];
+    // Write check for item already exist or not
+    var p = cart.cartItems.find((item)=>{return item.id == product.id});
+    if(p)
+     window.alert("Product already exist in cart");
+    else{
+      cart.cartItems.push(product);
+      cartList.splice(index,1);
+      cartList.splice(index,0,cart);
+      localStorage.setItem("cart-list",JSON.stringify(cartList));
+      window.alert("product successfuly added in cart..");
+    } 
+  }
+  else{
+    // very first time performing add to cart..
+    cartList.push({email: currentUser.email,cartItems:[product]});
+    localStorage.setItem("cart-list",JSON.stringify(cartList));
+    window.alert("product successfully added in cart..");
+  }
 }
 function SignUpComponent(mainDiv){
    mainDiv.innerHTML = "";

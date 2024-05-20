@@ -11,6 +11,7 @@
    <div id="main"></div>
    <script>
      !localStorage.getItem("user-list") && localStorage.setItem("user-list","[]");
+     !localStorage.getItem("cart-list") && localStorage.setItem("cart-list","[]");
      loadData();
      SignInComponent(); 
    </script>
