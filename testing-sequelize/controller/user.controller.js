@@ -5,6 +5,7 @@ export const signIn = async(request,response,next)=>{
     let {email,password} = request.body;
     try{
        let user = await User.findOne({where:{email},raw: true});
+       console.log(user);
        if(user)
           return User.checkPassword(password,user.password) ? response.status(200).json({message: 'sign in success',user}):response.status(401).json({error: "Bad request | Invalid password"});
        return response.status(401).json({error: "Bad request | Invalid email id"});

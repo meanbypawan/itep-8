@@ -33,8 +33,11 @@ sequelize.sync()
     console.log("Something wrong...");
 })
 
-User.checkPassword = async (password,encryptedPassword)=>{
-   return bcrypt.compareSync(password,encryptedPassword);
+User.checkPassword = (password,encryptedPassword)=>{
+   let status = bcrypt.compareSync(password,encryptedPassword);
+   console.log(password,encryptedPassword);
+   console.log(status);
+   return status;
 }
 export default User;
 /*
