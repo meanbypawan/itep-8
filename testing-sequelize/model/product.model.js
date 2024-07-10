@@ -9,7 +9,7 @@ const Product = sequelize.define("product",{
   },
   title: DataTypes.STRING,
   description: DataTypes.STRING,
-  category: DataTypes.STRING,
+  categoryName: DataTypes.STRING,
   price: DataTypes.FLOAT,
   discountPercentage: DataTypes.FLOAT,
   rating: DataTypes.FLOAT,
@@ -25,4 +25,7 @@ const Product = sequelize.define("product",{
   thumbnail: DataTypes.STRING
 });
 
+sequelize.sync(()=>{
+  console.log("Product table sync..");
+});
 export default Product;

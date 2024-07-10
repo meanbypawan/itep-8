@@ -2,12 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../db/dbConfig.js";
 
 const Category = sequelize.define("category",{
-   id:{
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-   },
-   slug:{
+  slug:{
     type: DataTypes.STRING,
     allowNull: false
    },
@@ -17,8 +12,11 @@ const Category = sequelize.define("category",{
    name:{
     type:DataTypes.STRING,
     allowNull: false,
-    trim: true
+    trim: true,
+    primaryKey: true
    }
 });
-
+sequelize.sync(()=>{
+   console.log("Category table synced...");
+})
 export default Category; 

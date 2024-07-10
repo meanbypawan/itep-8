@@ -5,8 +5,10 @@ const Reviews = sequelize.define("review",{
     comment: DataTypes.STRING,
     data: DataTypes.STRING,
     reviewerName: DataTypes.STRING,
-    reviewerEmail: DataTypes.STRING,
-    productId: DataTypes.INTEGER
+    reviewerEmail: DataTypes.STRING
 });
 
+sequelize.sync(()=>{
+    console.log("Review table sync");
+})
 export default Reviews;
